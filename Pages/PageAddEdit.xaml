@@ -9,31 +9,38 @@
       Title="PageAddEdit">
 
     <Grid>
-        <StackPanel Orientation="Vertical" 
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="4*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Orientation="Vertical" Grid.Column="0" 
+                    VerticalAlignment="Center" Background ="Black">
+        </StackPanel>
+        <StackPanel Orientation="Vertical" Grid.Column="1" 
                     VerticalAlignment="Center" Background="Beige">
             <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Center">
                 <TextBlock Text="ФИО водителя" Margin="5" Width="200"/>
-                <ComboBox Name="CmbDriver" Width="150" Height="30"
+                <ComboBox SelectedItem="{Binding Driver}" Name="CmbDriver" Width="150" Height="30"
                           Margin="5"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Center">
                 <TextBlock Text="ФИО механика" Margin="5" Width="200"/>
-                <ComboBox Name="CmbMechanic" Width="150" Height="30"
+                <ComboBox SelectedItem="{Binding Mechanic}" Name="CmbMechanic" Width="150" Height="30"
                           Margin="5"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Center">
                 <TextBlock Text="Цена" Margin="5" Width="200"/>
-                <TextBox Name="TxtPrice" Width="150"
+                <TextBox Text="{Binding price}" Name="TxtPrice" Width="150"
                          Margin="5"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Center">
                 <TextBlock Text="Машина" Margin="5"
                            Width="200"/>
-                <ComboBox Name="CmbCar" Width="150" Height="30"
+                <ComboBox SelectedItem="{Binding car}" Name="CmbCar" Width="150" Height="30"
                           Margin="5"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal"
@@ -41,7 +48,14 @@
                 <TextBlock Text="Дата" Margin="5"
                            Width="200"/>
                 <TextBox Name="TxtDate" Width="150"
-                         Margin="5" />
+                         Margin="5" 
+                         Text="{Binding date}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center">
+                <TextBlock Text="Фото" Margin="5" Width="200"/>
+                <ComboBox SelectedItem="{Binding Photo}" Name="CmbPhoto" Width="150" Height="30"
+                          Margin="5"/>
             </StackPanel>
             <Button Content="Сохранить" FontSize="20" Background="#7A1414"
                     Name="BtnSave"

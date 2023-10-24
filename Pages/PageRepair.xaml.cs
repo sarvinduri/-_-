@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Глазкова_Труфанова.Classes;
+using Excel = Microsoft.Office.Interop.Excel;
+using Word = Microsoft.Office.Interop.Word;
 
 namespace Глазкова_Труфанова.Pages
 {
@@ -51,16 +54,82 @@ namespace Глазкова_Труфанова.Pages
 
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
-            Classes.ClassFrame.frmObj.Navigate(new PageAddEdit());
+            Classes.ClassFrame.frmObj.Navigate(new PageAddEdit(null));
         }
 
-        private void TxtSearchName_TextChanged(object sender, TextChangedEventArgs e)
+        private void BtnClean_Click(object sender, RoutedEventArgs e)
         {
-            int cn = int.Parse(CmbFullName.SelectedValue.ToString());
-            dtgRepair.ItemsSource = Auto_repair_shopsEntities.GetContext().car.Where(x => x.id_car == cn).ToList();
-            //string search = TxtSearchName.Text;
-            //dtgRepair.ItemsSource = Auto_repair_shopsEntities.GetContext().car.Where(x => x.car_number.Contains(search)).ToList();
-            /*Where(x => x.car_number.search).ToList();*/
+            var usersForRemoving = dtgRepair.SelectedItems.Cast<repair>().ToList();
+            if (MessageBox.Show($"Удалить {usersForRemoving.Count()} пользователей?",
+                "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+
+                try
+                {                    
+                    Auto_repair_shopsEntities.GetContext().repair.RemoveRange(usersForRemoving);
+                    Auto_repair_shopsEntities.GetContext().SaveChanges();
+                    MessageBox.Show("Данные удалены");
+                    dtgRepair.ItemsSource = Auto_repair_shopsEntities.GetContext().repair.ToList();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message.ToString());
+                }
+        }
+
+        private void BtnEdit_Click(object sender, RoutedEventArgs e)
+        {
+            Classes.ClassFrame.frmObj.Navigate(new PageAddEdit((sender as Button).DataContext as repair));
+        }
+
+        private void BtnGoListView_Click(object sender, RoutedEventArgs e)
+        {
+            Classes.ClassFrame.frmObj.Navigate(new Pages.PageListView());
+        }
+
+        private void BtnExcel_Click(object sender, RoutedEventArgs e)
+        {
+            var app = new Excel.Application();
+
+            Excel.Workbook wr =
+             app.Workbooks.Open($"" +
+             $"{Directory.GetCurrentDirectory()}" +
+             $"\\Шаблон.xlsx");
+            Excel.Worksheet worksheet = (Excel.Worksheet)wr.Worksheets[1];
+
+            int indexRows = 1;
+
+            worksheet.Cells[1][indexRows] = "ФИО водителя";
+            worksheet.Cells[2][indexRows] = "ФИО механика";
+            worksheet.Cells[3][indexRows] = "Цена";
+
+            var ListRepair = Auto_repair_shopsEntities.
+                GetContext().repair.ToList();
+
+            foreach (var repair in ListRepair)
+            {
+                indexRows++;
+                worksheet.Cells[1][indexRows] = indexRows - 1;
+                worksheet.Cells[1][indexRows] = repair.Driver.full_name;
+                worksheet.Cells[1][indexRows] = repair.Mechanic.full_name;
+                worksheet.Cells[1][indexRows] = repair.price;
+            }
+            app.Visible = true;
+        }
+
+        private void BtnWord_Click(object sender, RoutedEventArgs e)
+        {
+            var wordApp = new Word.Application();
+
+            wordApp.Visible = true;
+            wordApp.Documents.Add();
+            wordApp.Documents.Open($"" +
+             $"{Directory.GetCurrentDirectory()}" +
+             $"\\Шаблон.docx");
+        }
+
+        private void BtnChart_Click(object sender, RoutedEventArgs e)
+        {
+            Classes.ClassFrame.frmObj.Navigate(new Pages.PageDiagram());
         }
     }
 }

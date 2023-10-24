@@ -20,6 +20,7 @@ namespace Глазкова_Труфанова.Classes
         public int id_driver { get; set; }
         public int id_mechanic { get; set; }
         public int id_car { get; set; }
+        public string Photo { get; set; }
     
         public virtual car car { get; set; }
         public virtual Driver Driver { get; set; }

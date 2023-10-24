@@ -12,25 +12,20 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Глазкова_Труфанова.Pages;
+using Глазкова_Труфанова.Classes;
 
-namespace Глазкова_Труфанова
+namespace Глазкова_Труфанова.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для PageListView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class PageListView : Page
     {
-        public MainWindow()
+        public PageListView()
         {
             InitializeComponent();
-            Classes.ClassFrame.frmObj = frmMain;
-            Classes.ClassFrame.frmObj.Navigate(new Pages.PageMain());
-        }
 
-        private void frmMain_ContentRendered(object sender, EventArgs e)
-        {
-
+            LstViewReair.ItemsSource = Auto_repair_shopsEntities.GetContext().repair.ToList();
         }
     }
 }

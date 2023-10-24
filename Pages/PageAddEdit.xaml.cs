@@ -21,10 +21,16 @@ namespace Глазкова_Труфанова.Pages
     /// </summary>
     public partial class PageAddEdit : Page
     {
-        public PageAddEdit()
+        private repair repair_currentRepair = new repair();
+
+        public PageAddEdit(repair selectedrepair)
         {
             InitializeComponent();
 
+            if (selectedrepair!= null) 
+                repair_currentRepair = selectedrepair;
+
+            DataContext = repair_currentRepair;
            
             CmbCar.ItemsSource = Auto_repair_shopsEntities.GetContext().car.ToList();
             CmbCar.SelectedValuePath = "id_car";
@@ -37,30 +43,36 @@ namespace Глазкова_Труфанова.Pages
             CmbMechanic.ItemsSource = Auto_repair_shopsEntities.GetContext().Mechanic.ToList();
             CmbMechanic.SelectedValuePath = "id_mechanic";
             CmbMechanic.DisplayMemberPath = "full_name";
+
+            CmbPhoto.ItemsSource = Auto_repair_shopsEntities.GetContext().repair.ToList();
         }
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
-            repair rep = new repair()
-            {
-                id_car = int.Parse(CmbCar.SelectedValue.ToString()),
-                id_driver = int.Parse(CmbDriver.SelectedValue.ToString()),
-                id_mechanic = int.Parse(CmbMechanic.SelectedValue.ToString()),
-                price = int.Parse(TxtPrice.Text)
-            };
-            Auto_repair_shopsEntities.GetContext().repair.Add(rep);
-            Auto_repair_shopsEntities.GetContext().SaveChanges();
+            StringBuilder errors = new StringBuilder();
 
-            MessageBoxResult boxResult = MessageBox.Show("Данные добавлены. Добавить еще?",
-                "Сообщение", MessageBoxButton.YesNo);
-            if (boxResult == MessageBoxResult.Yes)
+            if (repair_currentRepair.id_mechanic == 0)
+                Auto_repair_shopsEntities.GetContext().repair.Add(repair_currentRepair);
+            try
             {
-                //int.Parse(CmbCar.Clear)();
-                //int.Parse(CmbDriver.Clear)();
-                //CmbCar.Focus();
-            }
-            else
+                Auto_repair_shopsEntities.GetContext().SaveChanges();
+                MessageBox.Show("Информация сохранена");
                 Classes.ClassFrame.frmObj.Navigate(new Pages.PageRepair());
+            }
+            catch (Exception ex) 
+            {
+                MessageBox.Show(ex.Message.ToString());
+            }
+            //repair rep = new repair()
+            //{
+            //    id_car = int.Parse(CmbCar.SelectedValue.ToString()),
+            //    id_driver = int.Parse(CmbDriver.SelectedValue.ToString()),
+            //    id_mechanic = int.Parse(CmbMechanic.SelectedValue.ToString()),
+            //    price = int.Parse(TxtPrice.Text)
+            //};
+            //Auto_repair_shopsEntities.GetContext().repair.Add(rep);
+            //Auto_repair_shopsEntities.GetContext().SaveChanges();
+                
         }
     }
 }

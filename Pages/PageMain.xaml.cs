@@ -12,25 +12,25 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Глазкова_Труфанова.Pages;
 
-namespace Глазкова_Труфанова
+namespace Глазкова_Труфанова.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для PageMain.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class PageMain : Page
     {
-        public MainWindow()
+        public PageMain()
         {
             InitializeComponent();
-            Classes.ClassFrame.frmObj = frmMain;
-            Classes.ClassFrame.frmObj.Navigate(new Pages.PageMain());
         }
-
-        private void frmMain_ContentRendered(object sender, EventArgs e)
+        //public int Alpha { get; set; }
+        //public int Beta { get; set; }
+        //public int Gamma { get; set; }
+        //public int Delta { get; set; }
+        private void BtnNew_Click(object sender, RoutedEventArgs e)
         {
-
+            Classes.ClassFrame.frmObj.Navigate(new Pages.PageRepair());
         }
     }
 }

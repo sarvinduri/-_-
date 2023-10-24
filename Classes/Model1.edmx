@@ -39,60 +39,13 @@
           <Property Name="id_driver" Type="int" Nullable="false" />
           <Property Name="id_mechanic" Type="int" Nullable="false" />
           <Property Name="id_car" Type="int" Nullable="false" />
+          <Property Name="Photo" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <Association Name="FK_repair_car">
-          <End Role="car" Type="Self.car" Multiplicity="1" />
-          <End Role="repair" Type="Self.repair" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="car">
-              <PropertyRef Name="id_car" />
-            </Principal>
-            <Dependent Role="repair">
-              <PropertyRef Name="id_car" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_repair_Driver">
-          <End Role="Driver" Type="Self.Driver" Multiplicity="1" />
-          <End Role="repair" Type="Self.repair" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Driver">
-              <PropertyRef Name="id_driver" />
-            </Principal>
-            <Dependent Role="repair">
-              <PropertyRef Name="id_driver" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_repair_Mechanic">
-          <End Role="Mechanic" Type="Self.Mechanic" Multiplicity="1" />
-          <End Role="repair" Type="Self.repair" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Mechanic">
-              <PropertyRef Name="id_mechanic" />
-            </Principal>
-            <Dependent Role="repair">
-              <PropertyRef Name="id_mechanic" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="Хранилище ModelContainer">
           <EntitySet Name="car" EntityType="Self.car" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Driver" EntityType="Self.Driver" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Mechanic" EntityType="Self.Mechanic" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="repair" EntityType="Self.repair" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_repair_car" Association="Self.FK_repair_car">
-            <End Role="car" EntitySet="car" />
-            <End Role="repair" EntitySet="repair" />
-          </AssociationSet>
-          <AssociationSet Name="FK_repair_Driver" Association="Self.FK_repair_Driver">
-            <End Role="Driver" EntitySet="Driver" />
-            <End Role="repair" EntitySet="repair" />
-          </AssociationSet>
-          <AssociationSet Name="FK_repair_Mechanic" Association="Self.FK_repair_Mechanic">
-            <End Role="Mechanic" EntitySet="Mechanic" />
-            <End Role="repair" EntitySet="repair" />
-          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -138,6 +91,7 @@
           <NavigationProperty Name="car" Relationship="Self.FK_repair_car" FromRole="repair" ToRole="car" />
           <NavigationProperty Name="Driver" Relationship="Self.FK_repair_Driver" FromRole="repair" ToRole="Driver" />
           <NavigationProperty Name="Mechanic" Relationship="Self.FK_repair_Mechanic" FromRole="repair" ToRole="Mechanic" />
+          <Property Name="Photo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_repair_car">
           <End Role="car" Type="Self.car" Multiplicity="1" />
@@ -229,6 +183,7 @@
           <EntitySetMapping Name="repair">
             <EntityTypeMapping TypeName="Model.repair">
               <MappingFragment StoreEntitySet="repair">
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
                 <ScalarProperty Name="id_repair" ColumnName="id_repair" />
                 <ScalarProperty Name="price" ColumnName="price" />
                 <ScalarProperty Name="date" ColumnName="date" />
