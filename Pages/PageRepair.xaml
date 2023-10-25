@@ -81,6 +81,10 @@
                     Content="Диаграмма" FontSize="20"
                     Margin="5"
                     Click="BtnChart_Click"/>
+            <Button Name="BtnControl" Background="#7A1414"
+                    Content="Таблица контроля" FontSize="20"
+                    Margin="5"
+                    Click="BtnControl_Click"/>
         </StackPanel>
     </Grid>
 </Page>
