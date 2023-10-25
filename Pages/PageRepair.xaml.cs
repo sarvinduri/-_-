@@ -134,7 +134,11 @@ namespace Глазкова_Труфанова.Pages
 
         private void BtnControl_Click(object sender, RoutedEventArgs e)
         {
+<<<<<<< HEAD
+            Classes.ClassFrame.frmObj.Navigate(new Pages.PageClassDriver());
+=======
             Classes.ClassFrame.frmObj.Navigate(new Pages.PageClassRepair());
+>>>>>>> 8ecb1c703c3c9561bed8e605427ab774e861f13c
         }
     }
 }

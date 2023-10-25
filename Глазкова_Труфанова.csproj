@@ -82,7 +82,11 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Classes\ClassFrame.cs" />
+<<<<<<< HEAD
+    <Compile Include="Classes\ClassDriver.cs" />
+=======
     <Compile Include="Classes\ClassRepair.cs" />
+>>>>>>> 8ecb1c703c3c9561bed8e605427ab774e861f13c
     <Compile Include="Classes\Driver.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -115,7 +119,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+<<<<<<< HEAD
+    <Page Include="Pages\PageClassDriver.xaml">
+=======
     <Page Include="Pages\PageClassRepair.xaml">
+>>>>>>> 8ecb1c703c3c9561bed8e605427ab774e861f13c
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -140,8 +148,13 @@
     <Compile Include="Pages\PageAddEdit.xaml.cs">
       <DependentUpon>PageAddEdit.xaml</DependentUpon>
     </Compile>
+<<<<<<< HEAD
+    <Compile Include="Pages\PageClassDriver.xaml.cs">
+      <DependentUpon>PageClassDriver.xaml</DependentUpon>
+=======
     <Compile Include="Pages\PageClassRepair.xaml.cs">
       <DependentUpon>PageClassRepair.xaml</DependentUpon>
+>>>>>>> 8ecb1c703c3c9561bed8e605427ab774e861f13c
     </Compile>
     <Compile Include="Pages\PageDiagram.xaml.cs">
       <DependentUpon>PageDiagram.xaml</DependentUpon>

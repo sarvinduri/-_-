@@ -82,7 +82,11 @@
                     Margin="5"
                     Click="BtnChart_Click"/>
             <Button Name="BtnControl" Background="#7A1414"
+<<<<<<< HEAD
+                    Content="Таблица контроля водителя" FontSize="20"
+=======
                     Content="Таблица контроля" FontSize="20"
+>>>>>>> 8ecb1c703c3c9561bed8e605427ab774e861f13c
                     Margin="5"
                     Click="BtnControl_Click"/>
         </StackPanel>

@@ -9,6 +9,22 @@
       Title="PageClassDriver">
 
     <Grid>
+<<<<<<< HEAD
+        <DataGrid Name="dtgDriver"
+                  AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID водителя" Width="auto" 
+                                    Binding="{Binding id_driver}"/>
+                <DataGridTextColumn Header="ФИО водителя" Width="*"
+                                    Binding="{Binding full_name}"/>
+                <DataGridTextColumn Header="Телефон" Width="auto" 
+                                    Binding="{Binding phone}"/>
+                <DataGridTextColumn Header="ID машины" Width="*"
+                                    Binding="{Binding id_car}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+=======
         
+>>>>>>> 8ecb1c703c3c9561bed8e605427ab774e861f13c
     </Grid>
 </Page>
